@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lommeregner</title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+</head>
+<body>
+<div class="calculator">
+
+    <input type="text" class="calculator-screen" id="screen" value="" placeholder="0"/>
+
+    <div class="calculator-keys">
+
+        <button onclick="saveOperation(this.value)" type="button" class="operator" id="plus" value="+">+</button>
+        <button onclick="saveOperation(this.value)" type="button" class="operator" id="minus" value="-">-</button>
+        <button onclick="saveOperation(this.value)" type="button" class="operator" id="gange" value="*">&times;</button>
+        <button onclick="saveOperation(this.value)" type="button" class="operator" id="divider" value="/">&divide;</button>
+
+        <button onclick="saveValue(this.value)" type="button" value="7">7</button>
+        <button onclick="saveValue(this.value)" type="button" value="8">8</button>
+        <button onclick="saveValue(this.value)" type="button" value="9">9</button>
+
+
+        <button onclick="saveValue(this.value)" type="button" value="4">4</button>
+        <button onclick="saveValue(this.value)" type="button" value="5">5</button>
+        <button onclick="saveValue(this.value)" type="button" value="6">6</button>
+
+
+        <button onclick="saveValue(this.value)" type="button" value="1">1</button>
+        <button onclick="saveValue(this.value)" type="button" value="2">2</button>
+        <button onclick="saveValue(this.value)" type="button" value="3">3</button>
+
+
+        <button onclick="saveValue(this.value)" type="button" value="0">0</button>
+        <button onclick="decimal(this.value)" type="button" class="decimal" value=".">.</button>
+        <button onclick="allClear()" type="button" class="all-clear" value="all-clear">AC</button>
+
+        <button onclick="calculate()" type="button" class="equal-sign" value="=">=</button>
+
+    </div>
+</div>
+</body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="../static/calc.js"></script>
+</html>
