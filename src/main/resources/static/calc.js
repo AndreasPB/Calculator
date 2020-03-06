@@ -1,13 +1,19 @@
-let operationPressed = false;
+/**
+ * Alle mine variabler som funktionerne arbejder med
+ * @type {boolean}
+ */
 let firstValue = "";
 let secondValue = "";
 let operation = "";
+let operationPressed = false;
 let decimalPressed = false;
 
-
-
+/**
+ * Tager en knap's værdi og tilføjer det til et af mine to værdier
+ * Den skifter til værdi 2 hvis der er klikket på en operator
+ * @param el
+ */
 function saveValue(el) {
-
     if  (operationPressed === false) {
         firstValue += el;
         document.getElementById("screen").value = firstValue;
@@ -19,6 +25,11 @@ function saveValue(el) {
     }
 }
 
+/**
+ * Tager værdien fra en operator knap og ændre to booleans,
+ * for at gøre klar til den næste værdi
+ * @param el
+ */
 function saveOperation(el) {
     operation = el;
     document.getElementById("screen").value = operation;
@@ -26,10 +37,15 @@ function saveOperation(el) {
     decimalPressed = false;
 }
 
+/**
+ * Parser mine to værdier til en float(pga decimal)
+ * Tager værdien fra operation og bruger i en switch-case
+ * Limiter decimalpunkter til 5 for at undgå nogle underligt lange float ting
+ */
 function calculate() {
     let x = parseFloat(firstValue);
     let y = parseFloat(secondValue);
-    let symbol = Symbol(operation)
+    let symbol = Symbol(operation) // Vil erstatte min switch på en smart måde
     let result = "";
 
 
@@ -55,6 +71,11 @@ function calculate() {
     console.log("Resultat: " + r);
 }
 
+/**
+ * Tilføjer et decimalpunkt
+ * Kan kun placere et i hver værdi
+ * @param el
+ */
 function decimal(el) {
     if (!decimalPressed) {
         if (!operationPressed) {
@@ -67,12 +88,19 @@ function decimal(el) {
     }
 }
 
+/**
+ * Slette-funkion der sætte alle værdier tilbage til startværdierne og
+ * skriver den nye tomme firstValue til screen
+ */
 function allClear() {
     console.log("Du klikkede clear!!")
     startValues();
     document.getElementById("screen").value = firstValue;
 }
 
+/**
+ * Gentagelse af toppen for at kunne genbruge
+ */
 function startValues() {
     operationPressed = false;
     firstValue = "";
