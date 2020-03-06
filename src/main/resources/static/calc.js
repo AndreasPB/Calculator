@@ -1,6 +1,7 @@
 /**
+ * Programmet er begrænset til 2 værdier
+ *
  * Alle mine variabler som funktionerne arbejder med
- * @type {boolean}
  */
 let firstValue = "";
 let secondValue = "";
@@ -69,6 +70,8 @@ function calculate() {
     let r = result.toFixed(5);
     document.getElementById("screen").value = r;
     console.log("Resultat: " + r);
+
+    startValues();
 }
 
 /**
