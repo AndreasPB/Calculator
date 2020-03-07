@@ -41,7 +41,7 @@ function saveOperation(el) {
 /**
  * Parser mine to værdier til en float(pga decimal)
  * Tager værdien fra operation og bruger i en switch-case
- * Limiter decimalpunkter til 5 for at undgå nogle underligt lange float ting
+ * Limiter decimalpunkter til 2 for at undgå nogle underligt lange float decimaler
  */
 function calculate() {
     let x = parseFloat(firstValue);
@@ -67,7 +67,7 @@ function calculate() {
             result = "Hvad fanden laver du??";
     }
 
-    let r = result.toFixed(5);
+    let r = result.toFixed(2);
     document.getElementById("screen").value = r;
     console.log("Resultat: " + r);
 
