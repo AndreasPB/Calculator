@@ -33,7 +33,6 @@ html {
 
 button {
     height: 60px;
-    background-color: #fff;
     border-radius: 3px;
     border: 1px solid #c4c4c4;
     background-color: transparent;
@@ -87,7 +86,6 @@ button:hover {
     background-color: #2e86c0;
     border-color: #337cac;
     color: #fff;
-    grid-area: 2 / 4 / 6 / 5;
+    grid-area: 2 / 4 / 5 / 5;
     height: 100%;
 }
-

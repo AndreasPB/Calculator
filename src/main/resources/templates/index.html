@@ -8,6 +8,7 @@
 <body>
 <div class="calculator">
 
+    <input type="text" class="calculator-screen" id="history-screen"/>
     <input type="text" class="calculator-screen" id="screen" value="" placeholder="0"/>
 
     <div class="calculator-keys">
@@ -34,6 +35,7 @@
 
         <button onclick="saveValue(this.value)" type="button" value="0">0</button>
         <button onclick="decimal(this.value)" type="button" class="decimal" value=".">.</button>
+        <button onclick="deleteChar()" type="button" class="delete" value="DEL">DEL</button>
         <button onclick="allClear()" type="button" class="all-clear" value="all-clear">AC</button>
 
         <button onclick="calculate()" type="button" class="equal-sign" value="=">=</button>

@@ -6,8 +6,10 @@
 let firstValue = "";
 let secondValue = "";
 let operation = "";
+let history = "";
 let operationPressed = false;
 let decimalPressed = false;
+let calculatePressed = false;
 
 /**
  * Tager en knap's værdi og tilføjer det til et af mine to værdier
@@ -17,13 +19,16 @@ let decimalPressed = false;
 function saveValue(el) {
     if  (operationPressed === false) {
         firstValue += el;
+        history += el;
         document.getElementById("screen").value = firstValue;
         console.log("firstValue: " + firstValue);
     } else {
         secondValue += el;
+        history += el;
         document.getElementById("screen").value = secondValue;
         console.log("secondValue: " + secondValue);
     }
+    document.getElementById("history-screen").value = history;
 }
 
 /**
@@ -33,7 +38,9 @@ function saveValue(el) {
  */
 function saveOperation(el) {
     operation = el;
+    history += el;
     document.getElementById("screen").value = operation;
+    document.getElementById("history-screen").value = operation;
     operationPressed = true;
     decimalPressed = false;
 }
@@ -46,7 +53,7 @@ function saveOperation(el) {
 function calculate() {
     let x = parseFloat(firstValue);
     let y = parseFloat(secondValue);
-    let symbol = Symbol(operation) // Vil erstatte min switch på en smart måde
+    let symbol = Symbol(operation); // Vil erstatte min switch på en smart måde
     let result = "";
 
 
@@ -69,9 +76,13 @@ function calculate() {
 
     let r = result.toFixed(2);
     document.getElementById("screen").value = r;
+    history += "=" + r;
+    document.getElementById("history-screen").value = history;
     console.log("Resultat: " + r);
 
     startValues();
+    firstValue = r;
+    calculatePressed = true;
 }
 
 /**
@@ -96,18 +107,30 @@ function decimal(el) {
  * skriver den nye tomme firstValue til screen
  */
 function allClear() {
-    console.log("Du klikkede clear!!")
+    console.log("Du klikkede clear!!");
     startValues();
     document.getElementById("screen").value = firstValue;
+    history = "";
+    document.getElementById("history-screen").value = history;
+}
+
+function deleteChar() {
+  if (!operationPressed) {
+    firstValue = firstValue.slice(0, -1);
+    document.getElementById("screen").value = firstValue;
+  } else {
+    secondValue = secondValue.slice(0, -1);
+    document.getElementById("screen").value = secondValue;
+  }
 }
 
 /**
  * Gentagelse af toppen for at kunne genbruge
  */
 function startValues() {
-    operationPressed = false;
     firstValue = "";
     secondValue = "";
     operation = "";
+    operationPressed = false;
     decimalPressed = false;
 }
