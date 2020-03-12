@@ -1,6 +1,4 @@
 /**
- * Programmet er begrænset til 2 værdier
- *
  * Alle mine variabler som funktionerne arbejder med
  */
 let firstValue = "";
@@ -28,7 +26,7 @@ function saveValue(el) {
         document.getElementById("screen").value = secondValue;
         console.log("secondValue: " + secondValue);
     }
-    document.getElementById("history-screen").value = history;
+    // document.getElementById("history-screen").value = history;
 }
 
 /**
@@ -40,7 +38,29 @@ function saveOperation(el) {
     operation = el;
     history += el;
     document.getElementById("screen").value = operation;
-    document.getElementById("history-screen").value = operation;
+    document.getElementById("history-screen").value = history;
+
+    if (operationPressed) {
+        switch (operation) {
+            case "+":
+                result = x + y;
+                break;
+            case "-":
+                result = x - y;
+                break;
+            case "*":
+                result = x * y;
+                break;
+            case "/":
+                result = x / y;
+                break;
+            default:
+                result = "Hvad laver du??";
+        }
+
+
+    }
+
     operationPressed = true;
     decimalPressed = false;
 }
@@ -71,7 +91,7 @@ function calculate() {
             result = x / y;
             break;
         default:
-            result = "Hvad fanden laver du??";
+            result = "Hvad laver du??";
     }
 
     let r = result.toFixed(2);
@@ -94,10 +114,14 @@ function decimal(el) {
     if (!decimalPressed) {
         if (!operationPressed) {
             firstValue += el;
+            document.getElementById("screen").value = firstValue;
         } else {
             secondValue += el;
+            document.getElementById("screen").value = secondValue;
         }
 
+        history += el;
+        document.getElementById("history-screen").value = history;
         decimalPressed = true;
     }
 }
@@ -114,6 +138,9 @@ function allClear() {
     document.getElementById("history-screen").value = history;
 }
 
+/**
+ * Sletter den bagerste værdi
+ */
 function deleteChar() {
   if (!operationPressed) {
     firstValue = firstValue.slice(0, -1);
@@ -122,6 +149,8 @@ function deleteChar() {
     secondValue = secondValue.slice(0, -1);
     document.getElementById("screen").value = secondValue;
   }
+  history = history.slice(0, -1);
+  document.getElementById("history-screen").value = history;
 }
 
 /**
