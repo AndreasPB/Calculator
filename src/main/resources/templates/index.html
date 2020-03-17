@@ -13,32 +13,30 @@
 
     <div class="calculator-keys">
 
-        <button onclick="saveOperation(this.value)" type="button" class="operator" id="plus" value="+">+</button>
-        <button onclick="saveOperation(this.value)" type="button" class="operator" id="minus" value="-">-</button>
-        <button onclick="saveOperation(this.value)" type="button" class="operator" id="gange" value="*">&times;</button>
-        <button onclick="saveOperation(this.value)" type="button" class="operator" id="divider" value="/">&divide;</button>
+        <button class="operator" value="+">+</button>
+        <button class="operator" value="-">-</button>
+        <button class="operator" value="*">*</button>
+        <button class="operator" value="/">/</button>
 
-        <button onclick="saveValue(this.value)" type="button" value="7">7</button>
-        <button onclick="saveValue(this.value)" type="button" value="8">8</button>
-        <button onclick="saveValue(this.value)" type="button" value="9">9</button>
+        <button class="number" value="7">7</button>
+        <button class="number" value="8">8</button>
+        <button class="number" value="9">9</button>
 
+        <button class="number" value="4">4</button>
+        <button class="number" value="5">5</button>
+        <button class="number" value="6">6</button>
 
-        <button onclick="saveValue(this.value)" type="button" value="4">4</button>
-        <button onclick="saveValue(this.value)" type="button" value="5">5</button>
-        <button onclick="saveValue(this.value)" type="button" value="6">6</button>
+        <button class="number" value="1">1</button>
+        <button class="number" value="2">2</button>
+        <button class="number" value="3">3</button>
 
+        <button class="number" value="0">0</button>
 
-        <button onclick="saveValue(this.value)" type="button" value="1">1</button>
-        <button onclick="saveValue(this.value)" type="button" value="2">2</button>
-        <button onclick="saveValue(this.value)" type="button" value="3">3</button>
+        <button id="decimal" class="decimal" value=".">.</button>
+        <button id="deleteChar" class="delete">DEL</button>
+        <button id="allClear" class="all-clear">AC</button>
 
-
-        <button onclick="saveValue(this.value)" type="button" value="0">0</button>
-        <button onclick="decimal(this.value)" type="button" class="decimal" value=".">.</button>
-        <button onclick="deleteChar()" type="button" class="delete" value="DEL">DEL</button>
-        <button onclick="allClear()" type="button" class="all-clear" value="all-clear">AC</button>
-
-        <button onclick="calculate()" type="button" class="equal-sign" value="=">=</button>
+        <button id="calculate" class="equal-sign">=</button>
 
     </div>
 </div>

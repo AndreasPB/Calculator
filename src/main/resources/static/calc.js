@@ -5,6 +5,7 @@ let firstValue = "";
 let secondValue = "";
 let operation = "";
 let history = "";
+let numberPressed = false;
 let operationPressed = false;
 let decimalPressed = false;
 let calculatePressed = false;
@@ -14,68 +15,53 @@ let calculatePressed = false;
  * Den skifter til værdi 2 hvis der er klikket på en operator
  * @param el
  */
-function saveValue(el) {
+$(".number").click(function () {
     if  (operationPressed === false) {
-        firstValue += el;
-        history += el;
-        document.getElementById("screen").value = firstValue;
+        firstValue += $(this).attr("value");
+        history += $(this).attr("value");
+        $("#screen").val(firstValue);
         console.log("firstValue: " + firstValue);
     } else {
-        secondValue += el;
-        history += el;
-        document.getElementById("screen").value = secondValue;
+        secondValue += $(this).attr("value");
+        history += $(this).attr("value");
+        $("#screen").val(secondValue);
         console.log("secondValue: " + secondValue);
     }
-    // document.getElementById("history-screen").value = history;
-}
+    numberPressed = true;
+});
+
 
 /**
- * Tager værdien fra en operator knap og ændre to booleans,
+ * Tager værdien fra en operator knap og ændre to booleans
  * for at gøre klar til den næste værdi
  * @param el
  */
-function saveOperation(el) {
-    operation = el;
-    history += el;
-    document.getElementById("screen").value = operation;
-    document.getElementById("history-screen").value = history;
+$(".operator").click(function () {
 
-    if (operationPressed) {
-        switch (operation) {
-            case "+":
-                result = x + y;
-                break;
-            case "-":
-                result = x - y;
-                break;
-            case "*":
-                result = x * y;
-                break;
-            case "/":
-                result = x / y;
-                break;
-            default:
-                result = "Hvad laver du??";
-        }
+    if(numberPressed || calculatePressed) {
+        operation = $(this).attr("value");
+        history += $(this).attr("value");
+        $("#screen").val(operation);
+        $("#history-screen").val(history);
 
-
+        operationPressed = true;
+        decimalPressed = false;
+    } else {
+        $("#screen").val("Skriv et tal først!");
     }
+});
 
-    operationPressed = true;
-    decimalPressed = false;
-}
 
 /**
  * Parser mine to værdier til en float(pga decimal)
  * Tager værdien fra operation og bruger i en switch-case
  * Limiter decimalpunkter til 2 for at undgå nogle underligt lange float decimaler
  */
-function calculate() {
+$("#calculate").click(function () {
     let x = parseFloat(firstValue);
     let y = parseFloat(secondValue);
     let symbol = Symbol(operation); // Vil erstatte min switch på en smart måde
     let result = "";
-
 
     switch (operation) {
         case "+":
@@ -94,64 +80,63 @@ function calculate() {
             result = "Hvad laver du??";
     }
 
-    let r = result.toFixed(2);
-    document.getElementById("screen").value = r;
+    let r = Math.round(result*1000)/1000;
+    $("#screen").val(r);
     history += "=" + r;
-    document.getElementById("history-screen").value = history;
-    console.log("Resultat: " + r);
+    $("#history-screen").val(history);
 
     startValues();
     firstValue = r;
     calculatePressed = true;
-}
+});
 
 /**
  * Tilføjer et decimalpunkt
  * Kan kun placere et i hver værdi
  * @param el
  */
-function decimal(el) {
+$("#decimal").click(function () {
     if (!decimalPressed) {
         if (!operationPressed) {
-            firstValue += el;
-            document.getElementById("screen").value = firstValue;
+            firstValue += $(this).attr("value");
+            $("#screen").val(firstValue);
         } else {
-            secondValue += el;
-            document.getElementById("screen").value = secondValue;
+            secondValue += $(this).attr("value");
+            $("#screen").val(secondValue);
         }
 
-        history += el;
-        document.getElementById("history-screen").value = history;
+        history += $(this).attr("value");
+        $("#history-screen").val(history);
         decimalPressed = true;
     }
-}
+});
 
 /**
  * Slette-funkion der sætte alle værdier tilbage til startværdierne og
  * skriver den nye tomme firstValue til screen
  */
-function allClear() {
-    console.log("Du klikkede clear!!");
+$("#allClear").click(function () {
     startValues();
-    document.getElementById("screen").value = firstValue;
+    $("#screen").val(firstValue);
     history = "";
-    document.getElementById("history-screen").value = history;
-}
+    $("#history-screen").val(history);
+});
+
 
 /**
  * Sletter den bagerste værdi
  */
-function deleteChar() {
-  if (!operationPressed) {
-    firstValue = firstValue.slice(0, -1);
-    document.getElementById("screen").value = firstValue;
-  } else {
-    secondValue = secondValue.slice(0, -1);
-    document.getElementById("screen").value = secondValue;
-  }
-  history = history.slice(0, -1);
-  document.getElementById("history-screen").value = history;
-}
+$("#deleteChar").click(function () {
+    if (!operationPressed) {
+        firstValue = firstValue.slice(0, -1);
+        $("#screen").val(firstValue);
+    } else {
+        secondValue = secondValue.slice(0, -1);
+        $("#screen").val(secondValue);
+    }
+    history = history.slice(0, -1);
+});
+
 
 /**
  * Gentagelse af toppen for at kunne genbruge
@@ -160,6 +145,7 @@ function startValues() {
     firstValue = "";
     secondValue = "";
     operation = "";
+    numberPressed = false;
     operationPressed = false;
     decimalPressed = false;
 }
