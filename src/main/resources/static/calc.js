@@ -15,19 +15,19 @@ let calculatePressed = false;
  * Den skifter til værdi 2 hvis der er klikket på en operator
  * @param el
  */
-$(".number").click(function () {
-    if  (operationPressed === false) {
-        firstValue += $(this).attr("value");
-        history += $(this).attr("value");
-        $("#screen").val(firstValue);
-        console.log("firstValue: " + firstValue);
-    } else {
-        secondValue += $(this).attr("value");
-        history += $(this).attr("value");
-        $("#screen").val(secondValue);
-        console.log("secondValue: " + secondValue);
-    }
-    numberPressed = true;
+$(".number").click(function() {
+  if (operationPressed === false) {
+    firstValue += $(this).attr("value");
+    history += $(this).attr("value");
+    $("#screen").val(firstValue);
+    console.log("firstValue: " + firstValue);
+  } else {
+    secondValue += $(this).attr("value");
+    history += $(this).attr("value");
+    $("#screen").val(secondValue);
+    console.log("secondValue: " + secondValue);
+  }
+  numberPressed = true;
 });
 
 
@@ -36,19 +36,19 @@ $(".number").click(function () {
  * for at gøre klar til den næste værdi
  * @param el
  */
-$(".operator").click(function () {
+$(".operator").click(function() {
 
-    if(numberPressed || calculatePressed) {
-        operation = $(this).attr("value");
-        history += $(this).attr("value");
-        $("#screen").val(operation);
-        $("#history-screen").val(history);
+  if (numberPressed || calculatePressed) {
+    operation = $(this).attr("value");
+    history += $(this).attr("value");
+    $("#screen").val(operation);
+    $("#history-screen").val(history);
 
-        operationPressed = true;
-        decimalPressed = false;
-    } else {
-        $("#screen").val("Skriv et tal først!");
-    }
+    operationPressed = true;
+    decimalPressed = false;
+  } else {
+    $("#screen").val("Skriv et tal først!");
+  }
 });
 
 
@@ -57,37 +57,37 @@ $(".operator").click(function () {
  * Tager værdien fra operation og bruger i en switch-case
  * Limiter decimalpunkter til 2 for at undgå nogle underligt lange float decimaler
  */
-$("#calculate").click(function () {
-    let x = parseFloat(firstValue);
-    let y = parseFloat(secondValue);
-    let symbol = Symbol(operation); // Vil erstatte min switch på en smart måde
-    let result = "";
+$("#calculate").click(function() {
+  let x = parseFloat(firstValue);
+  let y = parseFloat(secondValue);
+  let symbol = Symbol(operation); // Vil erstatte min switch på en smart måde
+  let result = "";
 
-    switch (operation) {
-        case "+":
-            result = x + y;
-            break;
-        case "-":
-            result = x - y;
-            break;
-        case "*":
-            result = x * y;
-            break;
-        case "/":
-            result = x / y;
-            break;
-        default:
-            result = "Hvad laver du??";
-    }
+  switch (operation) {
+    case "+":
+      result = x + y;
+      break;
+    case "-":
+      result = x - y;
+      break;
+    case "*":
+      result = x * y;
+      break;
+    case "/":
+      result = x / y;
+      break;
+    default:
+      result = "Hvad laver du??";
+  }
 
-    let r = Math.round(result*1000)/1000;
-    $("#screen").val(r);
-    history += "=" + r;
-    $("#history-screen").val(history);
+  let r = Math.round(result * 1000) / 1000;
+  $("#screen").val(r);
+  history += "=" + r;
+  $("#history-screen").val(history);
 
-    startValues();
-    firstValue = r;
-    calculatePressed = true;
+  startValues();
+  firstValue = r;
+  calculatePressed = true;
 });
 
 /**
@@ -95,46 +95,46 @@ $("#calculate").click(function () {
  * Kan kun placere et i hver værdi
  * @param el
  */
-$("#decimal").click(function () {
-    if (!decimalPressed) {
-        if (!operationPressed) {
-            firstValue += $(this).attr("value");
-            $("#screen").val(firstValue);
-        } else {
-            secondValue += $(this).attr("value");
-            $("#screen").val(secondValue);
-        }
-
-        history += $(this).attr("value");
-        $("#history-screen").val(history);
-        decimalPressed = true;
+$("#decimal").click(function() {
+  if (!decimalPressed) {
+    if (!operationPressed) {
+      firstValue += $(this).attr("value");
+      $("#screen").val(firstValue);
+    } else {
+      secondValue += $(this).attr("value");
+      $("#screen").val(secondValue);
     }
+
+    history += $(this).attr("value");
+    $("#history-screen").val(history);
+    decimalPressed = true;
+  }
 });
 
 /**
  * Slette-funkion der sætte alle værdier tilbage til startværdierne og
  * skriver den nye tomme firstValue til screen
  */
-$("#allClear").click(function () {
-    startValues();
-    $("#screen").val(firstValue);
-    history = "";
-    $("#history-screen").val(history);
+$("#allClear").click(function() {
+  startValues();
+  $("#screen").val(firstValue);
+  history = "";
+  $("#history-screen").val(history);
 });
 
 
 /**
  * Sletter den bagerste værdi
  */
-$("#deleteChar").click(function () {
-    if (!operationPressed) {
-        firstValue = firstValue.slice(0, -1);
-        $("#screen").val(firstValue);
-    } else {
-        secondValue = secondValue.slice(0, -1);
-        $("#screen").val(secondValue);
-    }
-    history = history.slice(0, -1);
+$("#deleteChar").click(function() {
+  if (!operationPressed) {
+    firstValue = firstValue.slice(0, -1);
+    $("#screen").val(firstValue);
+  } else {
+    secondValue = secondValue.slice(0, -1);
+    $("#screen").val(secondValue);
+  }
+  history = history.slice(0, -1);
 });
 
 
@@ -142,10 +142,10 @@ $("#deleteChar").click(function () {
  * Gentagelse af toppen for at kunne genbruge
  */
 function startValues() {
-    firstValue = "";
-    secondValue = "";
-    operation = "";
-    numberPressed = false;
-    operationPressed = false;
-    decimalPressed = false;
+  firstValue = "";
+  secondValue = "";
+  operation = "";
+  numberPressed = false;
+  operationPressed = false;
+  decimalPressed = false;
 }
